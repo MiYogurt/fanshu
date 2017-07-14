@@ -27,13 +27,14 @@ export default {
   },
   methods: {
     getFriendMsg(){
-      const followersQ = this.$store.state.user.followerQuery();
-      followersQ.find().then(followers => {
+      const followeesQ = this.$store.state.user.followeeQuery();
+      followeesQ.find().then(followees => {
+          console.log(followees);
           const query = new this.$api.SDK.Query('_Status');
           query.include('source');
           query.include('article');
           query.equalTo('inboxType', 'friend');
-          query.containsAll('source', followers);
+          query.containedIn('source', followees);
           return query.find();
       }).then((statuses) => {
         //查询成功，返回状态列表，每个对象都是 AV.Status
@@ -52,3 +53,4 @@ export default {
 
 <style lang="css" scoped>
 </style>
+

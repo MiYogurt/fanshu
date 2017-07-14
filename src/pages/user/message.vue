@@ -30,7 +30,7 @@
 <script>
 export default {
 
-  name: 'myMessage',
+  name: 'message',
 
   data () {
     return {
@@ -80,7 +80,7 @@ export default {
       const fromUser = this.$store.state.user;
       status.set('from', fromUser);
       status.set('to', this.sendTo);
-      Status.sendPrivateStatus(status, fromUser.id).then((status) => {
+      Status.sendPrivateStatus(status, this.sendTo).then((status) => {
         if (status) {
           this.dialogFormVisible = false;
           this.$message({message:'发送私信成功！', type:'success'});

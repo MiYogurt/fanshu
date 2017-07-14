@@ -134,11 +134,13 @@ export default {
         console.log(article);
         const message =  `文章《${article.get('title')}》发布成功`;
 
+
         const status = new this.$api.SDK.Status();
         status.inboxType = 'friend';
         status.set('title', article.get('title'));
         status.set('type', 'create_article');
         status.set('article', article);
+
         this.$api.SDK.Status.sendStatusToFollowers(status).then((status) => {
           //发布状态成功，返回状态信息
           console.dir(status);
@@ -146,6 +148,7 @@ export default {
           //发布失败
           console.dir(err);
         });
+
 
         this.$message({message, type: 'success'});
         this.$router.replace({name:"ArticleShow", params: { id: article.id }});

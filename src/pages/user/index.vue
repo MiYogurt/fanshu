@@ -3,24 +3,25 @@
     <h3>{{ current_user.get('username') }}</h3>
 
     <hr>
-    <div class="oprator" v-if="user">
-      <button v-if="user.id != current_user.id" @click="toggleFollow">{{ followed? '取消关注':'关注' }}该用户</button>
 
-      <button v-if="user.id != current_user.id" @click="dialogFormVisible = true">发送私信</button>
-    </div>
 
-    <el-dialog title="发送私信给该用户" :visible.sync="dialogFormVisible">
-      <el-form :model="form" ref="form" label-width="80px" label-position="top" :rules="rules">
-        <el-form-item label="私信内容" prop="msg">
-          <el-input type="textarea" v-model="form.msg"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary"  @click="sendMsg">确 定</el-button>
+      <div class="oprator" v-if="user">
+        <button v-if="user.id != current_user.id" @click="toggleFollow">{{ followed? '取消关注':'关注' }}该用户</button>
+
+        <button v-if="user.id != current_user.id" @click="dialogFormVisible = true">发送私信</button>
       </div>
-    </el-dialog>
 
+      <el-dialog title="发送私信给该用户" :visible.sync="dialogFormVisible">
+        <el-form :model="form" ref="form" label-width="80px" label-position="top" :rules="rules">
+          <el-form-item label="私信内容" prop="msg">
+            <el-input v-model="form.msg"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary"  @click="sendMsg">确 定</el-button>
+        </div>
+      </el-dialog>
 
     <ul>
       <li v-for="article in articles"><router-link :to="{ name: 'ArticleShow', params: {id: article.id} }">{{ article.get('title') }}</router-link></li>
@@ -118,24 +119,20 @@ export default {
       const status = new Status(null, this.form.msg);
       status.set('from', this.user);
       status.set('to', this.current_user);
-      Status.sendPrivateStatus(status, this.current_user.id).then((status) => {
+      Status.sendPrivateStatus(status, this.current_user).then((status) => {
         if (status) {
           this.dialogFormVisible = false;
           this.$message({message:'发送私信成功！', type:'success'});
-          console.log(status)
         }
       },(err) =>{
         this.$message.error(err);
       })
     }
-  }
+  },
+
 
 };
 </script>
 
-<style lang="css">
-
-textarea{
-  min-height: 120px;
-}
+<style lang="css" scoped>
 </style>

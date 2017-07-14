@@ -31,7 +31,9 @@ export default {
       q.find().then((followees) => {
         this.followees = followees;
         this.$Progress.finish()
-      }).catch(this.$message.error)
+      }).catch((err) => {
+        this.$message.error(err);
+      })
     }
   }
 
