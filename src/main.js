@@ -4,7 +4,7 @@ import Vue from 'vue'
 import VueProgressBar from 'vue-progressbar'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-
+import '@/assets/global.css';
 
 import App from './App'
 import router from './router'
@@ -14,6 +14,23 @@ import api from './api'
 Vue.config.productionTip = false
 
 localStorage.setItem('debug', 'leancloud*') // 开启调试模式
+
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.needLogin)) {
+    if (!store.state.user) {
+      // Vue.prototype.$message.error("请先登录");
+      app.$message.error("请先登录");
+      next({
+        path: '/signIn'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
 
 Vue.mixin({
   beforeCreate() {
@@ -49,7 +66,7 @@ if (user) {
 }
 
 /* eslint-disable no-new */
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   store,

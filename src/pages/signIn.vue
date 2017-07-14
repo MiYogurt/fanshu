@@ -11,7 +11,7 @@
           <el-input type="password" v-model="user.pwd"></el-input>
         </el-form-item>
         <div class="oprator">
-          <el-button class="submit" type="primary" @click="submitForm('form')">登陆</el-button>
+          <el-button class="submit" type="primary" @keyup.enter="submitForm('form')" @click="submitForm('form')">登陆</el-button>
         </div>
       </el-form>
     </div>
@@ -41,6 +41,9 @@ export default {
         ],
       }
     };
+  },
+  mounted(){
+    this.$Progress.finish();
   },
   methods: {
     submitForm(formName) {

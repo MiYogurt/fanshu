@@ -12,6 +12,12 @@ const store = new Vuex.Store({
       state.user = user
     }
   },
+  getters: {
+    uid({user}) {
+      if(user) return user.id;
+      return false;
+    }
+  },
   actions: {
      exit(context){
        context.commit('setUser', null);
