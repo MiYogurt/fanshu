@@ -13,7 +13,7 @@ import api from './api'
 
 Vue.config.productionTip = false
 
-localStorage.setItem('debug', 'leancloud*') // 开启调试模式
+// localStorage.setItem('debug', 'leancloud*') // 开启调试模式
 
 
 router.beforeEach((to, from, next) => {

@@ -7,6 +7,11 @@ import signIn from '@/pages/signIn'
 import ArticleCreate from '@/pages/article/create'
 import ArticleShow from '@/pages/article/index'
 import ArticleEdit from '@/pages/article/edit'
+import User from '@/pages/user/index'
+import Followee from '@/pages/user/myFollowee'
+import Follower from '@/pages/user/myFollower'
+import Friend from '@/pages/user/friend'
+import Message from '@/pages/user/myMessage'
 
 Vue.use(Router)
 
@@ -45,6 +50,43 @@ export default new Router({
       path: '/article/:id',
       name: 'ArticleShow',
       component: ArticleShow,
+    },
+    {
+      path: '/followee',
+      nanme: 'Followee',
+      component: Followee,
+      meta: {
+       needLogin: true
+      }
+    },
+    {
+      path: '/follower',
+      nanme: 'Follower',
+      component: Follower,
+      meta: {
+       needLogin: true
+      }
+    },
+    {
+      path: '/friend',
+      nanme: 'Friend',
+      component: Friend,
+      meta: {
+       needLogin: true
+      }
+    },
+    {
+      path: '/messsage',
+      nanme: 'Message',
+      component: Message,
+      meta: {
+       needLogin: true
+      }
+    },
+    {
+      path: '/user/:id',
+      name: 'User',
+      component: User,
     },
     {
       path: '/article/:id/edit',

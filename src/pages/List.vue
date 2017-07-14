@@ -4,9 +4,15 @@
       <h2>{{ title }}</h2>
     </header>
     <section>
+
       <article v-for="article in articles">
+
+
         <h3>
-          <router-link :to="{ name:'ArticleShow', params: { id: article.id }}">{{ article.get('title') }}</router-link>
+          <router-link :to="{ name:'ArticleShow', params: { id: article.id }}">{{ article.get('title') }}</router-link> <br>
+
+          <router-link :to="{name: 'User', params: { id: article.get('author').id}}">{{ article.get('author').get('username') }}</router-link>
+
         </h3>
       </article>
     </section>
@@ -82,6 +88,7 @@ export default {
     getMyArticles(){
       this.title = "我的文章";
       const q = this.query();
+      q.equalTo('author', this.user);
       this.setArticles(q);
     },
     // cid => category_id

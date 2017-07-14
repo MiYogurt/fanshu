@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import api from '../api';
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    user: null
+    user: null,
   },
   mutations: {
     setUser (state, user) {
       state.user = user
-    }
+    },
   },
   getters: {
     uid({user}) {

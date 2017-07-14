@@ -6,13 +6,18 @@
 
       <template v-if="user">
         <li class="el-menu-item right" @click="heandleExit"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</li>
-        <el-submenu index="5" class="right">
+        <el-submenu index="user-seting" class="right">
           <span slot="title"> {{ user.getUsername() }} </span>
+          <el-menu-item index="me" :route="{ name:'User', params:{ id : user.id }}">我的主页</el-menu-item>
           <el-menu-item index="/article/create">发布文章</el-menu-item>
           <el-menu-item index="/article?type=me">我的文章</el-menu-item>
-          <el-menu-item index="5-3">消息</el-menu-item>
+          <el-menu-item index="/followee">我的关注</el-menu-item>
+          <el-menu-item index="/follower">我的粉丝</el-menu-item>
+          <el-menu-item index="/friend">朋友圈</el-menu-item>
+          <el-menu-item index="/messsage">站内信</el-menu-item>
         </el-submenu>
       </template>
+
       <template v-else>
         <el-menu-item index="/signUp" class="right"><i class="fa fa-user-o" aria-hidden="true"></i> 注册</el-menu-item>
         <el-menu-item index="/signIn" class="right"><i class="fa fa-key" aria-hidden="true"></i> 登陆</el-menu-item>
